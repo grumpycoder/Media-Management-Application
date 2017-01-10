@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CompanyPhone>
+           
+<ul class="list-group">
+    @if (!Model.Any())
+    {
+        <li class="list-group-item">
+            No Phone Numbers
+        </li>
+    }
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div>
+                @Html.DisplayName(item.PhoneType.Name)
+            </div>
+            <div>
+                @item.Phone.Number
+                <span class="pull-right">
+                    @Ajax.ActionLink(" ", "DeletePhone", "Company", new { item.Id }, new AjaxOptions
+                    {
+                        UpdateTargetId = "phoneListView"
+                    }, new { @class = "glyphicon glyphicon-remove" })
+                </span>
+            </div>
+
+        </li>
+    }
+</ul>
+

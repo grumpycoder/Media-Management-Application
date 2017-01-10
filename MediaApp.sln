@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaApp", "MediaApp\MediaApp.csproj", "{5EDA5DC3-D54C-4B14-8862-77253BFC0BCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{9A6E5978-0837-4593-BF48-A1ED94526A6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{E8FB1D90-B8F7-4771-93D1-A27361B4D901}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaCatalog", "MediaCatalog\MediaCatalog\MediaCatalog.csproj", "{9E080311-5000-467C-B099-2F26914620CE}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://chimera:8080/tfs/splc%20internal%20projects
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MediaApp\\MediaApp.csproj
+		SccProjectName1 = MediaApp
+		SccLocalPath1 = MediaApp
+		SccProjectUniqueName2 = BusinessLogicLayer\\BusinessLogicLayer.csproj
+		SccProjectName2 = BusinessLogicLayer
+		SccLocalPath2 = BusinessLogicLayer
+		SccProjectUniqueName3 = DataAccessLayer\\DataAccessLayer.csproj
+		SccProjectName3 = DataAccessLayer
+		SccLocalPath3 = DataAccessLayer
+		SccProjectUniqueName4 = MediaCatalog\\MediaCatalog\\MediaCatalog.csproj
+		SccProjectName4 = MediaCatalog/MediaCatalog
+		SccLocalPath4 = MediaCatalog\\MediaCatalog
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EDA5DC3-D54C-4B14-8862-77253BFC0BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EDA5DC3-D54C-4B14-8862-77253BFC0BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EDA5DC3-D54C-4B14-8862-77253BFC0BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EDA5DC3-D54C-4B14-8862-77253BFC0BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A6E5978-0837-4593-BF48-A1ED94526A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A6E5978-0837-4593-BF48-A1ED94526A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A6E5978-0837-4593-BF48-A1ED94526A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A6E5978-0837-4593-BF48-A1ED94526A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8FB1D90-B8F7-4771-93D1-A27361B4D901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8FB1D90-B8F7-4771-93D1-A27361B4D901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8FB1D90-B8F7-4771-93D1-A27361B4D901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8FB1D90-B8F7-4771-93D1-A27361B4D901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E080311-5000-467C-B099-2F26914620CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E080311-5000-467C-B099-2F26914620CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E080311-5000-467C-B099-2F26914620CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E080311-5000-467C-B099-2F26914620CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

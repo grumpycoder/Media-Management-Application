@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CompanyAddress>
+           
+<ul class="list-group">
+    @if (!Model.Any())
+    {
+        <li class="list-group-item">
+            No Addresses
+        </li>
+    }
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div>
+                @Html.DisplayName(item.AddressType.Name)
+            </div>
+            <div>
+                @item.Address.Street
+                @if (!string.IsNullOrWhiteSpace(@item.Address.Street2))
+                {
+                    <br />
+                    @item.Address.Street2 <br />
+                }
+                @string.Format("{0}, {1} {2}", String.IsNullOrWhiteSpace(@item.Address.City) ? "Unknown" : @item.Address.City, @item.Address.State != null ? @item.Address.State.Abbr : "XX", @item.Address.PostalCode)<br />
+
+                <span class="pull-right">
+                    @Ajax.ActionLink(" ", "DeleteAddress", "Company", new { item.Id }, new AjaxOptions
+                    {
+                        UpdateTargetId = "addressListView"
+                    }, new { @class = "glyphicon glyphicon-remove" })
+                </span>
+            </div>
+
+        </li>
+    }
+</ul>
+

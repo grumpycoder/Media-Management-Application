@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Company>
+
+@{
+    ViewBag.Title = "Companies";
+}
+<h2>@ViewBag.Title</h2>
+
+<div id="companyListView">
+    @Html.Partial("_CompanyListView", Model)
+</div>

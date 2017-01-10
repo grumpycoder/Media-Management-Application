@@ -1,0 +1,152 @@
+﻿@model CompanyAddressViewModel
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="myModalLabel">Company Address</h4>
+</div>
+
+@using (Html.BeginForm("CreateAddress", "Company", FormMethod.Post, new { @class = "modal-form", id = "frmAddress" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.CompanyId)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="modal-body">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AddressTypeId, "Type")
+            <div>
+                @*@(Html.Kendo().DropDownListFor(m => m.AddressTypeId).Name("AddressTypeId").Text("Name").Value("Id").BindTo(ViewBag.AddressTypeId).OptionLabel("-- Select Type --"))*@
+                @Html.DropDownListFor(m => m.AddressTypeId, null, "-- Address Type --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AddressTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Street)
+            <div>
+                @Html.TextBoxFor(model => model.Street, new { @placeholder = "Street", @class = "form-control" })
+                @Html.TextBoxFor(model => model.Street2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("City")
+            <div>
+                @*<input id="City" placeholder="City, State" class="form-control">*@
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @placeholder = "City name" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("State")
+            <div>
+                @*<input id="City" placeholder="City, State" class="form-control">*@
+                @Html.TextBoxFor(m => m.StateAbbr, new { @class = "form-control", @placeholder = "State Code" })
+                @Html.ValidationMessageFor(model => model.StateAbbr, "", new { @class = "text-danger" })
+                @Html.HiddenFor(m => m.StateFullName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostalCode)
+            <div>
+                @Html.TextBoxFor(model => model.PostalCode, new { @placeholder = "Postal Code", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryId, "Country")
+            <div>
+                @*@(Html.Kendo().DropDownListFor(model => model.CountryId).Name("CountryId").BindTo(ViewBag.CountryId as SelectList).OptionLabel("-- Select Country --").DataValueField("CountryId"))*@
+                @*@(Html.Kendo().DropDownListFor(m => m.CountryId).Name("CountryId").BindTo(ViewBag.CountryId as SelectList).Text("Name").Value("Id"))*@
+                @Html.DropDownListFor(model => model.CountryId, null, "-- Select Country --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+
+}
+
+<script>
+
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+    function extractCity(term) {
+        return split(term)[0];
+    }
+
+    function extractState(term) {
+        return split(term)[1];
+    }
+
+    function getcitydetails(fqcn) {
+
+        if (typeof fqcn == "undefined") fqcn = jQuery("#f_elem_city").val();
+        cityfqcn = fqcn;
+        if (cityfqcn) {
+            jQuery.getJSON(
+                   "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityfqcn,
+                function (data) {
+                    $('#City').val(data.geobytescity);
+                    $('#StateAbbr').val(extractState(fqcn));
+                    $('#StateFullName').val(data.geobytesregion);
+                    $('#CountryId option').each(function () { this.selected = (this.text.toLowerCase() == data.geobytescountry.toLowerCase()); });
+                }
+            );
+        }
+    }
+
+    $(function () {
+
+        $("#City").autocomplete({
+            source: function (request, response) {
+                var address = "http://gd.geobytes.com/AutoCompleteCity?";
+                $.ajax({
+                    url: address,
+                    dataType: "jsonp",
+                    data: {
+                        q: request.term
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 3,
+            select: function (event, ui) {
+                var selectedObj = ui.item;
+                getcitydetails(selectedObj.value);
+                return false;
+            },
+            open: function () {
+                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+
+        $('#City').autocomplete("option", "appendTo", "#frmAddress");
+
+    });
+
+</script>

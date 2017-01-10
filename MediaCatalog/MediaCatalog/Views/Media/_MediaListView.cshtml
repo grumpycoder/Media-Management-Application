@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Media>
+
+<ul class="list-group">
+    @if (!Model.Any())
+    {
+        <li class="list-group-item">
+            No Media
+        </li>
+    }
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <div>
+                @Html.ActionLink((string.IsNullOrWhiteSpace(item.Title) ? "Unknown" : item.Title), "Details", "Media", new { id = @item.Id }, null) 
+                <span class="pull-right">
+                    @Ajax.ActionLink(" ", "Delete", "Media", new { item.Id }, new AjaxOptions
+                    {
+                        UpdateTargetId = "mediaListView", 
+                        HttpMethod = "POST"
+                    }, new { @class = "glyphicon glyphicon-remove" })
+                </span>
+            </div>
+            <div>
+                @Html.DisplayName(item.MediaType.Name)
+            </div>
+        </li>
+    }
+</ul>
+
+
